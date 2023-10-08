@@ -79,7 +79,7 @@
 }
 
 .head_text {
-	@apply mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl;
+	@apply mt-2 text-4xl font-extrabold leading-[1.15] text-black sm:text-5xl;
 }
 
 .orange_gradient {
@@ -95,7 +95,7 @@
 }
 
 .desc {
-	@apply mt-5 text-lg text-gray-600 sm:text-xl max-w-2xl;
+	@apply mt-2 text-lg text-gray-600 sm:text-xl max-w-2xl;
 }
 
 .search_input {
@@ -121,7 +121,7 @@
 
 /* Form Component */
 .form_textarea {
-	@apply w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm text-gray-500 outline-0;
+	@apply w-full flex rounded-lg h-[150px] mt-2 p-3 text-sm text-gray-500 outline-0;
 }
 
 .form_input {

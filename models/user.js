@@ -13,7 +13,7 @@ const userSchema = new Schema({
 	image: { type: String },
 });
 
-// const UserModel = model("User", userSchema); // in express server which always running
+// const User = model("User", userSchema); // in express server which always running
 
 // But in nextjs api routes are serverless routes spin server when they called
 // So we use `models` object which provided by mongoose lib and stores all registered model.
