@@ -1,6 +1,6 @@
 // import React from "react"; we don't need to import React in Next.js
-
 import Feed from "@components/Feed";
+
 const Home = () => {
 	return (
 		<section className="w-full flex-center flex-col">
