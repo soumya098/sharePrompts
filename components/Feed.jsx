@@ -15,7 +15,8 @@ const PromptCardList = ({ data, handleTagClick }) => {
 const feed = () => {
 	const [searchText, setSearchText] = useState("");
 	const [prompts, setPrompts] = useState([]);
-	const handleSearch = (e) => {};
+	const [searchTimeout, setSearchTimeout] = useState(null);
+	const [searchedResults, setSearchedResults] = useState([]);
 
 	useEffect(() => {
 		const fetchPrompts = async () => {
@@ -27,13 +28,42 @@ const feed = () => {
 		fetchPrompts();
 	}, []);
 
+	const filterPrompts = (text) => {
+		const regex = new RegExp(text, "i"); // 'i' flag for case-insensitive search
+		return prompts.filter((item) => regex.test(item.creator.username) || regex.test(item.tag) || regex.test(item.prompt));
+	};
+
+	const handleSearchChange = (e) => {
+		clearTimeout(searchTimeout);
+		setSearchText(e.target.value);
+
+		// debounce method
+		setSearchTimeout(
+			setTimeout(() => {
+				const searchResult = filterPrompts(e.target.value);
+				setSearchedResults(searchResult);
+			}, 500)
+		);
+	};
+
+	const handleTagClick = (tag) => {
+		setSearchText(tag);
+
+		const searchResult = filterPrompts(tag);
+		setSearchedResults(searchResult);
+	};
+
 	return (
 		<section className="feed">
 			<form className="relative w-full flex-center">
-				<input type="text" placeholder="Search" value={searchText} onChange={handleSearch} required className="search_input peer" />
+				<input type="text" placeholder="Search" value={searchText} onChange={handleSearchChange} required className="search_input peer" />
 			</form>
 
-			<PromptCardList data={prompts} handleTagClick={{}} />
+			{searchText ? (
+				<PromptCardList data={searchedResults} handleTagClick={handleTagClick} />
+			) : (
+				<PromptCardList data={prompts} handleTagClick={handleTagClick} />
+			)}
 		</section>
 	);
 };
